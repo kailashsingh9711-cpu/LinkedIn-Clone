@@ -27,7 +27,7 @@ try {
     let existUserName = await User.findOne({userName})
     if(existUserName){
         return res.status(400).json({
-            message:"email already exist",
+            message:"user already exist",
             success:false,
         })
     }
@@ -57,9 +57,9 @@ try {
 
 
 } catch (error) {
-    console.log(error);
+    console.error("SignUp error:", error);
     return res.status(500).json({
-        message:error,
+        message: error && error.message ? error.message : String(error),
     })
     
     
@@ -113,9 +113,9 @@ try {
 
 
 } catch (error) {
-    console.log(error);
+    console.error("Login error:", error);
     return res.status(500).json({
-        message:error,
+        message: error && error.message ? error.message : String(error),
     })   
 }
 }
